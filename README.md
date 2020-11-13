@@ -206,7 +206,9 @@ Para levantar o projeto execute o comando abaixo:
 ### Estrutura
 
 #### Docker
-
+```sh
+    PENDENTE
+```
 
 #### Properties
 ```sh
