@@ -5,7 +5,7 @@
 
 	<groupId>com.cadastra</groupId>
 	<artifactId>cep</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>cep</name>
 	<description>api para cadastro de cep</description>
 
