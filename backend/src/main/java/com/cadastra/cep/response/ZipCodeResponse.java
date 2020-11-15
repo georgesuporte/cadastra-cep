@@ -5,6 +5,7 @@ import lombok.Data;
 @Data
 public class ZipCodeResponse {
 
+  private Long id;
   private String cep;
   private String logradouro;
   private String complemento;

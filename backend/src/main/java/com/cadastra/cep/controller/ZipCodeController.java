@@ -36,7 +36,7 @@ public class ZipCodeController {
     @Autowired
     private ZipCodeService zipCodeService;
 
-    @ApiOperation(httpMethod = "GET", value = "Listar todos os Ceps Cadastrados", response = ZipCodeEntity.class, responseContainer = "List")
+    @ApiOperation(httpMethod = "GET", value = "Listar todos os Ceps Cadastrados", response = ZipCodeResponse.class, responseContainer = "List")
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "OK"),
         @ApiResponse(code = 400, message = "Bad Request", response = ApiError.class),
@@ -44,12 +44,12 @@ public class ZipCodeController {
         @ApiResponse(code = 500, message = "Internal Server Error", response = ApiError.class)
     })
     @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<ZipCodeEntity>> listZipCode(@RequestHeader HttpHeaders headers) {	
-        return ResponseEntity.status(HttpStatus.OK).body(zipCodeService.findAll());
+	public ResponseEntity<List<ZipCodeResponse>> listZipCode(@RequestHeader HttpHeaders headers) {	
+        return ResponseEntity.status(HttpStatus.OK).body(new MapperZipCodeEntity().mapperZipCodeEntityToZipCodeResponse(zipCodeService.findAll()));
     }
 
 
-    @ApiOperation(httpMethod = "GET", value = "Consultar Cep", response = ZipCodeEntity.class, responseContainer = "List")
+    @ApiOperation(httpMethod = "GET", value = "Consultar Cep", response = ZipCodeResponse.class, responseContainer = "List")
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "OK"),
         @ApiResponse(code = 400, message = "Bad Request", response = ApiError.class),
