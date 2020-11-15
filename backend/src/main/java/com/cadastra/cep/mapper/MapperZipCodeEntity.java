@@ -45,4 +45,10 @@ public class MapperZipCodeEntity {
           }
         return listZipCodeResponse;
     }
+
+    public List<ZipCodeResponse> mapperZipCodeEntityToListZipCodeResponse(ZipCodeResponse zipCodeResponse) {
+        List<ZipCodeResponse> listZipCodeResponse = new ArrayList<>();
+        listZipCodeResponse.add(zipCodeResponse);
+        return listZipCodeResponse;
+    }
 }

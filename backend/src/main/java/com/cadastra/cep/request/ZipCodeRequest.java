@@ -51,8 +51,6 @@ public class ZipCodeRequest {
   private String ibge;
 
   @ApiModelProperty(value = "Atributo responsável por armazenaro codigo GIA", example = "")
-	@Size(min = 1, message = "Tamanho do campo inválido/incorreto")
-	@NotEmpty(message = "Campo obrigatório.")
   private String gia;
 
   @ApiModelProperty(value = "Atributo responsável por armazenaro codigo DDD", example = "71")
