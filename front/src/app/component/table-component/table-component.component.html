@@ -1,0 +1,53 @@
+<table mat-table matSort>
+
+  <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+  </ng-container>
+
+
+  <ng-container matColumnDef="cep">
+      <th mat-header-cell *matHeaderCellDef> Cep </th>
+  </ng-container>
+
+
+  <ng-container matColumnDef="localidade">
+      <th mat-header-cell *matHeaderCellDef> Localidade </th>
+  </ng-container>
+
+  <ng-container matColumnDef="logradouro">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Logradouro </th>
+  </ng-container>
+
+  <ng-container matColumnDef="complemento">
+      <th mat-header-cell *matHeaderCellDef> Complemento</th>
+  </ng-container>
+
+  <ng-container matColumnDef="bairro">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Bairro </th>
+  </ng-container>
+
+  <ng-container matColumnDef="uf">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> UF </th>
+  </ng-container>
+
+  <ng-container matColumnDef="ddd" >
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> DDD </th>
+  </ng-container>
+
+  <ng-container matColumnDef="gia">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Gia </th>
+  </ng-container>
+
+
+  <ng-container matColumnDef="ibge">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Ibge</th>
+  </ng-container>
+
+
+  <ng-container matColumnDef="siafi">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Siafi</th>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
