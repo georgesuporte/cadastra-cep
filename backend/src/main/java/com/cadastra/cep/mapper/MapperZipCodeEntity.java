@@ -2,7 +2,9 @@ package com.cadastra.cep.mapper;
 
 import com.cadastra.cep.entity.ZipCodeEntity;
 import com.cadastra.cep.request.ZipCodeRequest;
-
+import com.cadastra.cep.response.ZipCodeResponse;
+import java.util.List;
+import java.util.ArrayList;
 
 public class MapperZipCodeEntity {
 
@@ -22,5 +24,31 @@ public class MapperZipCodeEntity {
         zipCodeEntity.setSiafi(zipCodeRequest.getSiafi());
 		return zipCodeEntity;
         
+    }
+
+    public List<ZipCodeResponse> mapperZipCodeEntityToZipCodeResponse(List<ZipCodeEntity> listZipCodeEntity) {
+        List<ZipCodeResponse> listZipCodeResponse = new ArrayList<>();
+        for (ZipCodeEntity zipCodeEntity : listZipCodeEntity) {
+            ZipCodeResponse zipCodeResponse = new ZipCodeResponse();
+            zipCodeResponse.setId(zipCodeEntity.getId());
+            zipCodeResponse.setCep(zipCodeEntity.getCep());
+            zipCodeResponse.setLogradouro(zipCodeEntity.getLogradouro());
+            zipCodeResponse.setComplemento(zipCodeEntity.getComplemento());
+            zipCodeResponse.setBairro(zipCodeEntity.getBairro()); 
+            zipCodeResponse.setLocalidade(zipCodeEntity.getLocalidade());
+            zipCodeResponse.setUf(zipCodeEntity.getUf());
+            zipCodeResponse.setIbge(zipCodeEntity.getIbge());
+            zipCodeResponse.setGia(zipCodeEntity.getGia());
+            zipCodeResponse.setDdd(zipCodeEntity.getDdd());
+            zipCodeResponse.setSiafi(zipCodeEntity.getSiafi());
+            listZipCodeResponse.add(zipCodeResponse);
+          }
+        return listZipCodeResponse;
+    }
+
+    public List<ZipCodeResponse> mapperZipCodeEntityToListZipCodeResponse(ZipCodeResponse zipCodeResponse) {
+        List<ZipCodeResponse> listZipCodeResponse = new ArrayList<>();
+        listZipCodeResponse.add(zipCodeResponse);
+        return listZipCodeResponse;
     }
 }

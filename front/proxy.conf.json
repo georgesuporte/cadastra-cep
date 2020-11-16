@@ -1,0 +1,14 @@
+{
+  "/zip-code/v1": {
+    "target": "http://localhost:8774",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/zip-code/v1": "cadastra-cep/v1/zip-code"
+    }
+
+  }
+
+}
+

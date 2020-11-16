@@ -1,0 +1,29 @@
+<form>
+
+  <p>
+    <app-cep (cep)="consultaCep($event)" [items]="responseInterface"></app-cep>
+  </p>
+
+  <p>
+    <app-localidade [items]="responseInterface"></app-localidade>
+    <app-logradouro [items]="responseInterface"></app-logradouro>
+    <app-complemento [items]="responseInterface"></app-complemento>
+  </p>
+
+  <p>
+    <app-bairro [items]="responseInterface"></app-bairro>
+    <app-uf [items]="responseInterface"></app-uf>
+  </p>
+
+  <p>
+    <app-ddd [items]="responseInterface"></app-ddd>
+    <app-gia [items]="responseInterface"></app-gia>
+    <app-ibge [items]="responseInterface"></app-ibge>
+    <app-siafi [items]="responseInterface"></app-siafi>
+  </p>
+
+</form>
+
+<p>
+  <app-table-component></app-table-component>
+</p>

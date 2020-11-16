@@ -1,12 +1,11 @@
 package com.cadastra.cep.controller;
 
-import java.util.List;
-
-import com.cadastra.cep.entity.ZipCodeEntity;
+import javax.validation.Valid;
 import com.cadastra.cep.exceptions.BadRequestException;
 import com.cadastra.cep.mapper.MapperZipCodeEntity;
 import com.cadastra.cep.model.error.ApiError;
 import com.cadastra.cep.request.ZipCodeRequest;
+import com.cadastra.cep.response.ResponseData;
 import com.cadastra.cep.response.ZipCodeResponse;
 import com.cadastra.cep.service.ZipCodeService;
 
@@ -15,11 +14,11 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,7 +35,7 @@ public class ZipCodeController {
     @Autowired
     private ZipCodeService zipCodeService;
 
-    @ApiOperation(httpMethod = "GET", value = "Listar todos os Ceps Cadastrados", response = ZipCodeEntity.class, responseContainer = "List")
+    @ApiOperation(httpMethod = "GET", value = "Listar todos os Ceps Cadastrados", response = ResponseData.class, responseContainer = "List")
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "OK"),
         @ApiResponse(code = 400, message = "Bad Request", response = ApiError.class),
@@ -44,12 +43,14 @@ public class ZipCodeController {
         @ApiResponse(code = 500, message = "Internal Server Error", response = ApiError.class)
     })
     @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<ZipCodeEntity>> listZipCode(@RequestHeader HttpHeaders headers) {	
-        return ResponseEntity.status(HttpStatus.OK).body(zipCodeService.findAll());
+	public ResponseEntity<ResponseData> listZipCode(@RequestHeader HttpHeaders headers) {	
+        ResponseData responseData = new ResponseData();
+        responseData.setData(new MapperZipCodeEntity().mapperZipCodeEntityToZipCodeResponse(zipCodeService.findAll()));
+        return ResponseEntity.status(HttpStatus.OK).body(responseData);
     }
 
 
-    @ApiOperation(httpMethod = "GET", value = "Consultar Cep", response = ZipCodeEntity.class, responseContainer = "List")
+    @ApiOperation(httpMethod = "GET", value = "Consultar Cep", response = ResponseData.class, responseContainer = "List")
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "OK"),
         @ApiResponse(code = 400, message = "Bad Request", response = ApiError.class),
@@ -57,9 +58,11 @@ public class ZipCodeController {
         @ApiResponse(code = 500, message = "Internal Server Error", response = ApiError.class)
     })
     @GetMapping(value = "/consumer-zip-code/{cep}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ZipCodeResponse> findZipCode(@RequestHeader HttpHeaders headers, @PathVariable(value = "cep") String cep) {	
+	public ResponseEntity<ResponseData> findZipCode(@RequestHeader HttpHeaders headers, @PathVariable(value = "cep") String cep) {	
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(zipCodeService.findZipCode(cep));
+            ResponseData responseData = new ResponseData();
+            responseData.setData(new MapperZipCodeEntity().mapperZipCodeEntityToListZipCodeResponse(zipCodeService.findZipCode(cep)));
+            return ResponseEntity.status(HttpStatus.OK).body(responseData);
         } catch (Exception e) {
             throw new BadRequestException("Erro ao consultar. Cep informado inválido.");
         }
@@ -75,7 +78,7 @@ public class ZipCodeController {
     })
     @PostMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<HttpStatus> saveZipCode(@RequestHeader HttpHeaders headers, 
-    @RequestBody ZipCodeRequest zipCodeRequest) {	
+    @Valid  @RequestBody ZipCodeRequest zipCodeRequest) {	
         try {
             if(zipCodeService.findByCep(zipCodeRequest.getCep()).isEmpty()) {
                 zipCodeService.save(new MapperZipCodeEntity().mapperZipCodeRequestToEntity(zipCodeRequest));
