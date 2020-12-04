@@ -1,14 +1,13 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   MatDatepickerModule, MatFormFieldModule,
-
   MatIconModule,
   MatInputModule,
   MatNativeDateModule,
   MatSnackBarModule
-} from "@angular/material/";
+} from '@angular/material/';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BairroComponent } from '@app/component/fields/bairro/bairro.component';
@@ -25,15 +24,16 @@ import { LocalidadeComponent } from './component/fields/localidade/localidade.co
 import { LogradouroComponent } from './component/fields/logradouro/logradouro.component';
 import { SiafiComponent } from './component/fields/siafi/siafi.component';
 import { UfComponent } from './component/fields/uf/uf.component';
-import { FormComponentComponent } from './component/form-component/form-component.component';
+import { FormComponent } from './component/form-component/form.component';
 import { CepService } from './service/cep.service';
 import { TableComponentComponent } from './component/table-component/table-component.component';
 import {MatTableModule} from '@angular/material/table';
+import { CepFieldDirective } from './directive/CepFieldDirective';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FormComponentComponent,
+    FormComponent,
     CepComponent,
     LogradouroComponent,
     BairroComponent,
@@ -46,6 +46,7 @@ import {MatTableModule} from '@angular/material/table';
     UfComponent,
     IdComponent,
     TableComponentComponent,
+    CepFieldDirective,
 
   ],
   imports: [
@@ -61,9 +62,24 @@ import {MatTableModule} from '@angular/material/table';
     MatNativeDateModule,
     MatSnackBarModule,
     NgxMaskModule.forRoot(),
-    MatTableModule
+    MatTableModule,
+    ReactiveFormsModule,
   ],
   providers: [CepService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    CepComponent,
+    LogradouroComponent,
+    BairroComponent,
+    ComplementoComponent,
+    DddComponent,
+    GiaComponent,
+    IbgeComponent,
+    LocalidadeComponent,
+    SiafiComponent,
+    UfComponent,
+    IdComponent,
+    TableComponentComponent,
+  ]
 })
 export class AppModule { }

@@ -33,6 +33,10 @@ export class CepService {
     );
   }
 
+  public saveCep() {
+    console.log('aquii2');
+  }
+
   handleError(error: HttpErrorResponse) {
     return throwError(error);
   }

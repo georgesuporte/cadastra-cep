@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { DataResponse } from '@app/interface/data.interface';
+import { FormGroup } from '@angular/forms';
+import { FieldConfig } from '@app/interface/field.interface';
 import { ResponseInterface } from '@app/interface/response.interfaces';
-
 @Component({
   selector: 'app-cep',
   templateUrl: './cep.component.html',
@@ -13,6 +13,8 @@ export class CepComponent implements OnInit {
 
   @Output() cep: EventEmitter<string> = new EventEmitter<string>();
 
+  field: FieldConfig;
+  group: FormGroup;
   constructor() { }
 
 

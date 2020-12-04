@@ -1,10 +1,20 @@
-<form>
+<form [formGroup]="form" (submit)="onSubmit($event)">
+  <ng-container *ngFor="let field of fields;" cep-field-directive [field]="field" [group]="form">
+  </ng-container>
 
-  <p>
+
+</form>
+    <div class="col s4">
+      <div class="section">
+          <button type="submit" mat-raised-button class="light-button">Salvar</button>
+      </div>
+    </div>
+
+  <!-- <p>
     <app-cep (cep)="consultaCep($event)" [items]="responseInterface"></app-cep>
-  </p>
+  </p> -->
 
-  <p>
+  <!-- <p>
     <app-localidade [items]="responseInterface"></app-localidade>
     <app-logradouro [items]="responseInterface"></app-logradouro>
     <app-complemento [items]="responseInterface"></app-complemento>
@@ -20,10 +30,12 @@
     <app-gia [items]="responseInterface"></app-gia>
     <app-ibge [items]="responseInterface"></app-ibge>
     <app-siafi [items]="responseInterface"></app-siafi>
-  </p>
+  </p> -->
 
-</form>
+
+
 
 <p>
   <app-table-component></app-table-component>
 </p>
+
